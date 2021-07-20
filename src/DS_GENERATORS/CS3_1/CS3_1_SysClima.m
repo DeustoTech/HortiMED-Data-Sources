@@ -7,7 +7,7 @@ file = 'CS3_1_SysClima.m';
 file_path   = which(file);
 folder_path = replace(file_path,file,'');
 
-XLSX_path = fullfile(folder_path,'..','..','data/GROSS/E0_2016_2017_2018_2019_Menaka.xlsx');
+XLSX_path = fullfile(folder_path,'..','..','..','data/GROSS/E0_2016_2017_2018_2019_Menaka.xlsx');
 %
 websave(XLSX_path,'https://drive.google.com/u/0/uc?id=1ntcuCD2Kbu32FaNiSWqP80BOhgNPl-Z_&export=download')
 
@@ -71,7 +71,7 @@ iTs = TableSeries(ds);
 iTs = Sort(iTs);
 
 %%
-folder_path = fullfile(folder_path,'..','..','data/MATLAB_FORMAT/CS3_1_Sysclima.mat');
+folder_path = fullfile(folder_path,'..','..','..','data/MATLAB_FORMAT/CS3_1_Sysclima.mat');
 %
 %
 %%
