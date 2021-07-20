@@ -1,4 +1,4 @@
-function E02016201720182019MenakaS4 = sysclima_2018_S2
+function E02016201720182019MenakaS4 = sysclima_2018_S2(XLSX_path)
 
 %% Import data from spreadsheet
 % Script for importing data from the following spreadsheet:
@@ -24,8 +24,7 @@ opts = setvaropts(opts, "VarName1", "WhitespaceRule", "preserve");
 opts = setvaropts(opts, "VarName1", "EmptyFieldRule", "auto");
 
 % Import the data
-E02016201720182019MenakaS4 = readtable("/Users/djoroya/Dropbox/My Mac (Deyviss’s MacBook Pro)/Documents/GitHub/ModellingAndControl/TimeSeries/Horti_MED/SPAIN/CLIMA/2020-04-26-SYSCLIMA/A000_RelatedFiles/Sysclima/E0_2016_2017_2018_2019_Menaka.xlsx", opts, "UseExcel", false);
-
+E02016201720182019MenakaS4 = readtable(XLSX_path);
 
 %% Clear temporary variables
 clear opts

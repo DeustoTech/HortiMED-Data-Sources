@@ -7,22 +7,19 @@ file = 'CS3_1_SysClima.m';
 file_path   = which(file);
 folder_path = replace(file_path,file,'');
 
-folder_path = fullfile(folder_path,'..','data/E0_2016_2017_2018_2019_Menaka.xlsx');
+XLSX_path = fullfile(folder_path,'..','..','data/GROSS/E0_2016_2017_2018_2019_Menaka.xlsx');
 %
-websave(folder_path,'https://drive.google.com/u/0/uc?id=1ntcuCD2Kbu32FaNiSWqP80BOhgNPl-Z_&export=download')
+websave(XLSX_path,'https://drive.google.com/u/0/uc?id=1ntcuCD2Kbu32FaNiSWqP80BOhgNPl-Z_&export=download')
 
 %% From XLSX to date
-addpath('functions')
-
 %
-clear 
-%%
-T2016_S2 = sysclima_2016_S2;
-T2017_S1 = sysclima_2017_S1;
-T2017_S2 = sysclima_2017_S2;
-T2018_S1 = sysclima_2018_S1;
-T2018_S2 = sysclima_2018_S2;
-T2019_S1 = sysclima_2019_S1;
+%% 
+T2016_S2 = sysclima_2016_S2(XLSX_path);
+T2017_S1 = sysclima_2017_S1(XLSX_path);
+T2017_S2 = sysclima_2017_S2(XLSX_path);
+T2018_S1 = sysclima_2018_S1(XLSX_path);
+T2018_S2 = sysclima_2018_S2(XLSX_path);
+T2019_S1 = sysclima_2019_S1(XLSX_path);
 
 %%
 FullData = {T2016_S2, ...
@@ -65,6 +62,27 @@ for ivar = fullvars
 end
 %%
 ds = struct2table(fullst);
-ds.Properties.VariableNames{29} = 'DateTime';
+ds.Properties.VariableNames{28} = 'DateTime';
 %%
 ds.DateTime = datetime(ds.DateTime);
+
+%%
+iTs = TableSeries(ds);
+iTs = Sort(iTs);
+
+%%
+folder_path = fullfile(folder_path,'..','..','data/MATLAB_FORMAT/CS3_1_Sysclima.mat');
+%
+%
+%%
+vars = {'DPV','DeltaT','DeltaX','TVentilaci_n','Text','Tinv','Troc_o','V_viento'};
+
+for ivar = vars
+   iTs.DataSet.(ivar{:}) = arrayfun(@(i)str2double(iTs.DataSet.(ivar{:}){i}),1:iTs.ndata)';
+end
+
+iTs.DataSet.Var2 = [];
+%%
+save(folder_path,'iTs')
+
+
