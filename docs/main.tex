@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\input{settings.tex}
+\title{\textbf{Historical Data Sources in HortiMED Project}}
+
+\author[1]{Deyviss Jesús Oroya Villalta}
+\affil[1]{University of Deusto}
+\begin{document}
+    \maketitle
+    \section{Introduction}
+    This document compile the several dataset The HortiMED is a European project with the objective of getting better the intensive horticulture in Mediterranean greenhouses. 
+
+    \section{Definitions of Dataset}
+
+    \begin{table}[ht!]
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline 
+            \textbf{Name}                & \textbf{Notation}      \\ \hline \hline 
+            Number of Variables & $N_{vars}$    \\ \hline
+            Number of Rows      & $N_{rows}$    \\ \hline 
+            List of Variables   & $vars$        \\ \hline
+        \end{tabular}
+        \caption{Characteristic of Datasets}
+    \end{table}
+ 
+    \begin{table}[ht!]
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline 
+            \textbf{Characteristic}\\ \hline  \hline 
+            Units       \\  \hline 
+            Range       \\ \hline 
+            Mean        \\ \hline 
+            Variance    \\  \hline 
+            Histogram   \\ \hline
+        \end{tabular}
+        \caption{Description of Numerical Variables }
+    \end{table}
+    \section{DataSets}
+
+    \subsection{Case Study: Low Technology greenhouse (Egypt)}
+    \subsection{Case Study: Medium Technology greenhouse (Algeria)}
+    \subsection{Case Study: High Technology greenhouse (Spain)}
+
+    \begin{dataset}[sysclima]\label{ds:sysclima}
+        Datos climáticos del invernnadero de Meñaka. Este contiene información sobre humedad, temperature y radiación en el interior del invernadero. Además de medidas exteriores de temperatura y radiación. Además de esto contiene la señal de los controles existentes en este invernadero, como pueden ser la pantalla de sombre y el porcentaje de apertura de las ventanas. 
+
+        \begin{table}[ht!]
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline 
+                \textbf{Property} & \textbf{Value} \\ \hline \hline 
+                Name & Sysclima \\ 
+                Gross Data URL & \href{https://drive.google.com/u/0/uc?id=1ntcuCD2Kbu32FaNiSWqP80BOhgNPl-Z_&export=download}
+                {google drive link}  \\
+                Size & $94,7 MB$ \\ 
+                MATLAB Script & \texttt{CS3\_1\_SysClima.m}\\  
+                MATLAB Format URL & 
+            \end{tabular}
+            \caption{Metada of the Dataset \ref{ds:sysclima}}
+        \end{table}
+    \end{dataset} 
+    \section{Conclusion}
+\end{document}   

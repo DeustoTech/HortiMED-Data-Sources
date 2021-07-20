@@ -1,0 +1,6 @@
+data/*
+*.log
+*.out
+*.fls
+*.aux
+src/dependences
