@@ -51,7 +51,7 @@ for ivar = rmv
     ExteriorClima.(ivar{:}) = [];
 end
 %%
-iTs = TableSeries(ExteriorClima);
+ds = ExteriorClima;
 
 folder_path = fullfile(folder_path,'..','..','..','data/MATLAB_FORMAT/CS3_2_ExteriorClima.mat');
-save(folder_path,'iTs')
+save(folder_path,'ds')

@@ -69,25 +69,18 @@ ds.Properties.VariableNames{29} = 'DateTime';
 ds.DateTime = datetime(ds.DateTime);
 
 %%
-iTs = TableSeries(ds);
-iTs = Sort(iTs);
+vars = {'DPV','DeltaT','DeltaX','TVentilaci_n','Text','Tinv','Troc_o','V_viento'};
+
+for ivar = vars
+   ds.(ivar{:}) = arrayfun(@(i)str2double(ds.(ivar{:}){i}),1:size(ds,1))';
+end
+
+ds.Var2 = [];
+ds.VarName2 = [];
 
 %%
 folder_path = fullfile(folder_path,'..','..','..','data/MATLAB_FORMAT/CS3_1_Sysclima.mat');
 %
-%
-%%
-vars = {'DPV','DeltaT','DeltaX','TVentilaci_n','Text','Tinv','Troc_o','V_viento'};
-
-for ivar = vars
-   iTs.DataSet.(ivar{:}) = arrayfun(@(i)str2double(iTs.DataSet.(ivar{:}){i}),1:iTs.ndata)';
-end
-
-iTs.DataSet.Var2 = [];
-iTs.DataSet.VarName2 = [];
-
-%%
-
-save(folder_path,'iTs')
+save(folder_path,'ds')
 
 
