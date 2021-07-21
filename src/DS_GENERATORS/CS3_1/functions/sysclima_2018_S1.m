@@ -23,7 +23,7 @@ opts = setvaropts(opts, "VarName1", "WhitespaceRule", "preserve");
 opts = setvaropts(opts, "VarName1", "EmptyFieldRule", "auto");
 
 % Import the data
-E02016201720182019MenakaS3 = readtable(XLSX_path);
+E02016201720182019MenakaS3 = readtable(XLSX_path,opts);
 
 %% Clear temporary variables
 clear opts

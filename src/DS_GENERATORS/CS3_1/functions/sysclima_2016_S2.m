@@ -23,7 +23,7 @@ opts = setvaropts(opts, ["VarName1", "Text", "Vviento", "Tinv", "Troco", "TVenti
 opts = setvaropts(opts, ["VarName1", "Text", "Vviento", "Tinv", "Troco", "TVentilacin", "DeltaX", "DeltaT", "DPV"], "EmptyFieldRule", "auto");
 
 % Import the data
-E02016201720182019Menaka = readtable(XLSX_path);
+E02016201720182019Menaka = readtable(XLSX_path,opts);
 
 %% Clear temporary variables
 clear opts

@@ -9,6 +9,8 @@ folder_path = replace(file_path,file,'');
 
 XLSX_path = fullfile(folder_path,'..','..','..','data/GROSS/E0_2016_2017_2018_2019_Menaka.xlsx');
 %
+opts = weboptions;
+opts.Timeout = 25;
 websave(XLSX_path,'https://drive.google.com/u/0/uc?id=1ntcuCD2Kbu32FaNiSWqP80BOhgNPl-Z_&export=download')
 
 %% From XLSX to date
@@ -62,7 +64,7 @@ for ivar = fullvars
 end
 %%
 ds = struct2table(fullst);
-ds.Properties.VariableNames{28} = 'DateTime';
+ds.Properties.VariableNames{29} = 'DateTime';
 %%
 ds.DateTime = datetime(ds.DateTime);
 
@@ -82,7 +84,10 @@ for ivar = vars
 end
 
 iTs.DataSet.Var2 = [];
+iTs.DataSet.VarName2 = [];
+
 %%
+
 save(folder_path,'iTs')
 
 
