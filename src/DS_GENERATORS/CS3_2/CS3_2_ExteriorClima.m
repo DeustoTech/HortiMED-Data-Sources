@@ -9,8 +9,9 @@ folder_path = replace(file_path,file,'');
 
 csv_path = fullfile(folder_path,'..','..','..','data/GROSS/ExteriorClima.csv');
 %
-websave(csv_path,'https://drive.google.com/u/0/uc?id=1IgeSiQX78wgLdHXctOr6MPnp7Bx8f15x&export=download')
-
+if ~exist(csv_path,'file')
+    websave(csv_path,'https://drive.google.com/u/0/uc?id=1IgeSiQX78wgLdHXctOr6MPnp7Bx8f15x&export=download')
+end
 %%
 opts = delimitedTextImportOptions("NumVariables", 25);
 
@@ -52,6 +53,43 @@ for ivar = rmv
 end
 %%
 ds = ExteriorClima;
+
+
+%% Generation Radiation via Mechanistic Model
+
+% Meñaka
+
+Latitud  = 43.349024834327; 
+Longitud = -2.797651290893;
+DGMT = 2; % Madrid
+
+LocalTimes = ds.DateTime;
+iter = 0;
+for iLT = LocalTimes'
+    iter = iter + 1;
+    Rad(iter) = DateTime2Rad(iLT,Longitud,Latitud,DGMT);
+end
+%
+%%
+ds.Rad = Rad';
+%%
+Max_Att = 0.8;
+ds.RadCloud = (1-Max_Att*ds.clouds_all/100).*Rad';
+
+
+%%
+ind = (1:1000);
+clf
+subplot(2,1,1)
+hold on
+plot(ds.DateTime(ind),ds.Rad(ind),'-','LineWidth',2)
+plot(ds.DateTime(ind), ds.RadCloud(ind),'-','LineWidth',2)
+legend('RadMec','RadCloud')
+
+subplot(2,1,2)
+plot(ds.DateTime(ind),ds.clouds_all(ind))
+
+%%
 
 folder_path = fullfile(folder_path,'..','..','..','data/MATLAB_FORMAT/CS3_2_ExteriorClima.mat');
 save(folder_path,'ds')

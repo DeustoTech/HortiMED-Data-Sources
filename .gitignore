@@ -5,3 +5,4 @@ data/GROSS/*
 *.aux
 src/dependences
 .DS_Store
+*.asv
