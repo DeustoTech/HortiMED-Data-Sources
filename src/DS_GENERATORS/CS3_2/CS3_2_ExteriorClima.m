@@ -74,18 +74,18 @@ end
 ds.Rad = Rad';
 %%
 Max_Att = 0.8;
-ds.RadCloud = (1-Max_Att*ds.clouds_all/100).*Rad';
+ds.RadCloud = (1-Max_Att*(ds.clouds_all/100).^3).*Rad';
 
 
 %%
-ind = (1:1000);
+ind = (1:4000);
 clf
 subplot(2,1,1)
 hold on
-plot(ds.DateTime(ind),ds.Rad(ind),'-','LineWidth',2)
+plot(ds.DateTime(ind),ds.Rad(ind),'-','LineWidth',3)
 plot(ds.DateTime(ind), ds.RadCloud(ind),'-','LineWidth',2)
 legend('RadMec','RadCloud')
-
+grid on
 subplot(2,1,2)
 plot(ds.DateTime(ind),ds.clouds_all(ind))
 
