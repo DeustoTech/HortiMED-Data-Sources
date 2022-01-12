@@ -6,8 +6,8 @@ file = 'CS3_2_ExteriorClima.m';
 %
 file_path   = which(file);
 folder_path = replace(file_path,file,'');
-
-csv_path = fullfile(folder_path,'..','..','..','data/GROSS/ExteriorClima.csv');
+%%
+csv_path = fullfile(folder_path,'..','..','..','..','data/GROSS/ExteriorClima.csv');
 %
 if ~exist(csv_path,'file')
     websave(csv_path,'https://drive.google.com/u/0/uc?id=1IgeSiQX78wgLdHXctOr6MPnp7Bx8f15x&export=download')
@@ -91,5 +91,5 @@ plot(ds.DateTime(ind),ds.clouds_all(ind))
 
 %%
 
-folder_path = fullfile(folder_path,'..','..','..','data/MATLAB_FORMAT/CS3_2_ExteriorClima.mat');
+folder_path = fullfile(folder_path,'..','..','..','..','data/MATLAB_FORMAT/CS3_2_ExteriorClima.mat');
 save(folder_path,'ds')

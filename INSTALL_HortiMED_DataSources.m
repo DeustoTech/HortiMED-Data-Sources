@@ -30,6 +30,8 @@ mkdir('data/MATLAB_FORMAT')
 
 %%
 unzip('https://github.com/djoroya/MechanisticSolarRadiationModel/archive/refs/heads/main.zip',path_depen)
+unzip('https://github.com/djoroya/ModellingAndControl/archive/refs/heads/master.zip',path_depen)
+
 %% ADD FOLDERS
 addpath(genpath(path_file))
 

@@ -1,3 +1,5 @@
+slprj/*
+*.slxc
 data/GROSS/*
 *.log
 *.out

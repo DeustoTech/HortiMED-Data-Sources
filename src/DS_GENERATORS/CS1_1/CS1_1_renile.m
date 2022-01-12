@@ -64,8 +64,7 @@ for isensor = sensors'
         dataset(i,j).value =  ds.x_value(logical(b1.*b2),1);
         dataset(i,j).DateTime =  DT(logical(b1.*b2));
         dataset(i,j).Name  = field;
-        
-
+       
     end
 end
 %%
