@@ -2,19 +2,19 @@ clear
 
 %% Dowload Sysclima DataSet on XLSX Format
 
-file = 'CS3_3_production.m';
+file = 'INSTALL_HortiMED_DataSources.m';
 %
 file_path   = which(file);
 folder_path = replace(file_path,file,'');
 
-XLSX_path = fullfile(folder_path,'..','..','..','data/GROSS/Producción_Menaka.xlsx');
+XLSX_path = fullfile(folder_path,'data/GROSS/Producción_Menaka.xlsx');
 %
 opts = weboptions;
 opts.Timeout = 25;
-
-id = '1dOcKpT-ZnOsbi2XhQtvEdFLUugvOdkke';
-websave(XLSX_path,"https://drive.google.com/u/0/uc?id="+id+"&export=download")
-
+if ~exist(XLSX_path)
+    id = '1dOcKpT-ZnOsbi2XhQtvEdFLUugvOdkke';
+    websave(XLSX_path,"https://drive.google.com/u/0/uc?id="+id+"&export=download")
+end
 %% From XLSX to date
 %
 
@@ -38,7 +38,19 @@ ProduccinMenaka = readtable(XLSX_path, opts, "UseExcel", false);
 
 ProduccinMenaka = ProduccinMenaka(:,[1 8]);
 
-% save
-folder_path = fullfile(folder_path,'..','..','..','data/MATLAB_FORMAT/CS3_3_production.mat');
 
-save(folder_path,'ProduccinMenaka')
+
+%%
+[~,ind]=sort(ProduccinMenaka.FechaDeEntrega);
+prod1 = ProduccinMenaka(ind,:);
+
+prod2_2017_2019 = groupsummary(prod1,'FechaDeEntrega',@sum);
+prod2_2017_2019.Properties.VariableNames{3} = 'Neto';
+%%
+
+% save
+file_path = fullfile(folder_path,'data/MATLAB_FORMAT/CS3_3_production.mat');
+%%
+
+
+save(file_path,'prod2_2017_2019')

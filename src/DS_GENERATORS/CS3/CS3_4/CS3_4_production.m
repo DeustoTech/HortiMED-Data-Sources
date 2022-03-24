@@ -2,19 +2,20 @@ clear
 
 %% Dowload Sysclima DataSet on XLSX Format
 
-file = 'CS3_4_production.m';
+file = 'INSTALL_HortiMED_DataSources.m';
 %
 file_path   = which(file);
 folder_path = replace(file_path,file,'');
-
-XLSX_path = fullfile(folder_path,'..','..','..','data/GROSS/Producción_Menaka_2021.xlsx');
+%%
+XLSX_path = fullfile(folder_path,'data/GROSS/Producción_Menaka_2021.xlsx');
 %
-opts = weboptions;
-opts.Timeout = 25;
+if ~exist(XLSX_path,'file')
+    opts = weboptions;
+    opts.Timeout = 25;
 
-id = '1dParrygGINzMvShC1fdD_VTCKmY3tt5g';
-websave(XLSX_path,"https://drive.google.com/u/0/uc?id="+id+"&export=download")
-
+    id = '1dParrygGINzMvShC1fdD_VTCKmY3tt5g';
+    websave(XLSX_path,"https://drive.google.com/u/0/uc?id="+id+"&export=download")
+end
 %% From XLSX to date
 %
 
@@ -44,10 +45,27 @@ opts = setvaropts(opts, ["Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8"]
 opts = setvaropts(opts, "FechaDeEntrega", "InputFormat", "");
 
 % Import the data
-ProduccionMenaka2021 = readtable("/Users/djoroya/Dropbox/My Mac (Deyviss’s MacBook Pro)/Documents/GitHub/projects/HortiMED/HortiMED-Data-Sources/data/GROSS/Producción_Menaka_2021.xlsx", opts, "UseExcel", false);
+ProduccionMenaka2021 = readtable("/Users/djoroya/Dropbox/My Mac (Deyviss’s MacBook Pro)/Documents/GitHub/projects/HortiMED/code/HortiMED-Data-Sources/data/GROSS/Producción_Menaka_2021.xlsx", opts, "UseExcel", false);
+prod0 = ProduccionMenaka2021(2:end,:);
 
+%% order data 
+[~,ind]=sort(prod0.FechaDeEntrega);
+prod1 = prod0(ind,:);
+
+prod2 = groupsummary(prod1,'FechaDeEntrega',@sum);
+prod2.Properties.VariableNames{3} = 'Neto';
+%%
+% clf
+% hold on
+% plot(prod0.FechaDeEntrega,prod0.Neto,'.-')
+% plot(prod1.FechaDeEntrega,prod1.Neto,'.--')
+% plot(prod2.FechaDeEntrega,prod2.Neto,'.--')
+% legend
 %%
 % save
-folder_path = fullfile(folder_path,'..','..','..','data/MATLAB_FORMAT/CS3_4_production.mat');
 
-save(folder_path,'ProduccionMenaka2021')
+prod2_2020_2021 = prod2;
+
+file_path = fullfile(folder_path,'data/MATLAB_FORMAT/CS3_4_production.mat');
+
+save(file_path,'prod2_2020_2021')
