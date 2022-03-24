@@ -33,6 +33,10 @@ clf
 ShowData(iTs_cell)
 %%
 ds_cell = arrayfun(@(iTs) iTs.DataSet,iTs_cell,'UniformOutput',0);
+
+for ids = 1:length(ds_cell)
+    ds_cell{ids}.DateTime = iTs_cell(ids).DateTime;
+end
 %%
 
 file = 'INSTALL_HortiMED_DataSources.m';
