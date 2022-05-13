@@ -33,9 +33,16 @@ end
 %% create cumsum
 clf
 hold on
+clear new_ds_prod_2
+iter = 0;
 for ids = new_ds_prod
-   plot(ids{:}.DateTime,cumsum(ids{:}.MatureFruit),'.')
+    iter = iter + 1;
+    new_ds_prod_2{iter} = ids{:};
+    
+    new_ds_prod_2{iter}.MatureFruit = cumsum(ids{:}.MatureFruit);
+    plot(ids{:}.DateTime,new_ds_prod_2{iter}.MatureFruit,'.')
 end
+
 %%
 
 file = 'INSTALL_HortiMED_DataSources.m';
@@ -43,4 +50,4 @@ file = 'INSTALL_HortiMED_DataSources.m';
 file_path   = which(file);
 folder_path = replace(file_path,file,'');
 
-save(fullfile(folder_path,'data','MATLAB_FORMAT','CS3_7_all_cum_production.mat'),'new_ds_prod')
+save(fullfile(folder_path,'data','MATLAB_FORMAT','CS3_7_all_cum_production.mat'),'new_ds_prod_2')
