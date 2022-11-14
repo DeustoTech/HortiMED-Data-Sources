@@ -7,6 +7,7 @@ params.Number_Clams = 176;
 params.Number_Silver = 650;
 
 first_day = datetime('01-May-2021');
+params.first_day = first_day;
 %
 %                      %time[d]       % Fish Mass [g/fish]      % Fish Mass STD[g/fish]  % Feed Intake [g/(days . fish)]    % Gain   [g/(fish . period)        % FCR
 data_aquaponic = [     0               30                          6.37                       18                              0                                   0       ; ...
@@ -58,7 +59,7 @@ names = {'Tilapia','Mullet','Clams','Silver','Cray'}
 
 subplot(2,1,1)
 hold on 
-for iname = names;
+for iname = names
 errorbar(data_aquaponic.DateTime,data_aquaponic.(iname{:}+"Mass"),data_aquaponic.(iname{:}+"MassErr"),'LineWidth',2)
 end
 ylabel('g/fish')
@@ -75,3 +76,18 @@ ylabel('kg')
 legend(names)
 grid on
 %%
+%%
+fish = [];
+fish.tilapia = data_aquaponic(:,[15 2]);
+fish.mullet = data_aquaponic(:,[15 7]);
+fish.clams = data_aquaponic(:,[15 9]);
+fish.cray  = data_aquaponic(:,[15 11]);
+fish.silver = data_aquaponic(:,[15 13]);
+
+for ivar = fieldnames(fish)'
+   fish.(ivar{:})(isnan(fish.(ivar{:}){:,2}),:) = [];
+   fish.(ivar{:}).Properties.VariableNames{2} = 'Mass';
+end
+%%
+params_fish = params;
+save('CS1_5_fish','data_aquaponic','params_fish','fish')
